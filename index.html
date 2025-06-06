@@ -1,41 +1,66 @@
 ---
 ---
 
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>Coding Problems Tracker</title>
   <script src="assets/script.js" defer></script>
   <style>
+    body {
+      font-family: sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+    .dark {
+      background: #121212;
+      color: #f0f0f0;
+    }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 8px; border: 1px solid #ccc; text-align: left; }
-    select, input { margin-right: 10px; }
+    select, input { margin-right: 10px; padding: 4px; }
     .tag { background-color: #eee; padding: 2px 6px; margin: 2px; border-radius: 4px; display: inline-block; }
+    .dark .tag { background-color: #333; color: #fff; }
+    .progress-bar {
+      width: 100px;
+      height: 10px;
+      background: #ddd;
+      position: relative;
+    }
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background: green;
+    }
   </style>
 </head>
 <body>
   <h1>🧠 Coding Problems Tracker</h1>
+  <button onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
 
+  <br><br>
   <label>Filter by Difficulty:</label>
   <select id="levelFilter">
     <option value="">All</option>
-    <option value="Beginner">Beginner</option>
-    <option value="Intermediate">Intermediate</option>
-    <option value="Advanced">Advanced</option>
+    <option value="Easy">Easy</option>
+    <option value="Medium">Medium</option>
+    <option value="Hard">Hard</option>
   </select>
 
   <label>Filter by Category:</label>
-  <select id="categoryFilter"></select>
+  <select id="categoryFilter">
+    <option value="">All</option>
+  </select>
 
   <input type="text" id="searchTag" placeholder="Filter by tag...">
 
+  <br><br>
   <table id="problemTable">
     <thead>
       <tr>
+        <th>✔</th>
         <th>Problem</th>
         <th>Link</th>
-        <th>Status</th>
         <th>Difficulty</th>
         <th>Category</th>
         <th>Tags</th>
@@ -44,9 +69,9 @@
     <tbody>
       {% for p in site.data.problems %}
       <tr>
+        <td><input type="checkbox"></td>
         <td>{{ p.name }}</td>
         <td><a href="{{ p.link }}" target="_blank">Link</a></td>
-        <td>{{ p.status }}</td>
         <td class="level">{{ p.level }}</td>
         <td class="category">{{ p.category }}</td>
         <td class="tags">
