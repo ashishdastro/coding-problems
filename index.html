@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Coding Problems Tracker</title>
+  <script src="assets/script.js" defer></script>
+  <style>
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px; border: 1px solid #ccc; text-align: left; }
+    select, input { margin-right: 10px; }
+    .tag { background-color: #eee; padding: 2px 6px; margin: 2px; border-radius: 4px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <h1>🧠 Coding Problems Tracker</h1>
+
+  <label>Filter by Difficulty:</label>
+  <select id="levelFilter">
+    <option value="">All</option>
+    <option value="Beginner">Beginner</option>
+    <option value="Intermediate">Intermediate</option>
+    <option value="Advanced">Advanced</option>
+  </select>
+
+  <label>Filter by Category:</label>
+  <select id="categoryFilter"></select>
+
+  <input type="text" id="searchTag" placeholder="Filter by tag...">
+
+  <table id="problemTable">
+    <thead>
+      <tr>
+        <th>Problem</th>
+        <th>Link</th>
+        <th>Status</th>
+        <th>Difficulty</th>
+        <th>Category</th>
+        <th>Tags</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in site.data.problems %}
+      <tr>
+        <td>{{ p.name }}</td>
+        <td><a href="{{ p.link }}" target="_blank">Link</a></td>
+        <td>{{ p.status }}</td>
+        <td class="level">{{ p.level }}</td>
+        <td class="category">{{ p.category }}</td>
+        <td class="tags">
+          {% for tag in p.tags %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
