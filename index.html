@@ -32,29 +32,34 @@
       height: 100%;
       background: green;
     }
+    .controls {
+      margin-bottom: 1em;
+    }
   </style>
 </head>
 <body>
   <h1>🧠 Coding Problems Tracker</h1>
-  <button onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
 
-  <br><br>
-  <label>Filter by Difficulty:</label>
-  <select id="levelFilter">
-    <option value="">All</option>
-    <option value="Easy">Easy</option>
-    <option value="Medium">Medium</option>
-    <option value="Hard">Hard</option>
-  </select>
+  <div class="controls">
+    <button onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+    <button onclick="resetProgress()">🔄 Reset</button>
+    <br><br>
+    <label>Filter by Difficulty:</label>
+    <select id="levelFilter">
+      <option value="">All</option>
+      <option value="Easy">Easy</option>
+      <option value="Medium">Medium</option>
+      <option value="Hard">Hard</option>
+    </select>
 
-  <label>Filter by Category:</label>
-  <select id="categoryFilter">
-    <option value="">All</option>
-  </select>
+    <label>Filter by Category:</label>
+    <select id="categoryFilter">
+      <option value="">All</option>
+    </select>
 
-  <input type="text" id="searchTag" placeholder="Filter by tag...">
+    <input type="text" id="searchTag" placeholder="Filter by tag...">
+  </div>
 
-  <br><br>
   <table id="problemTable">
     <thead>
       <tr>
@@ -69,7 +74,7 @@
     <tbody>
       {% for p in site.data.problems %}
       <tr>
-        <td><input type="checkbox"></td>
+        <td><input type="checkbox" class="progress-box" data-name="{{ p.name }}"></td>
         <td>{{ p.name }}</td>
         <td><a href="{{ p.link }}" target="_blank">Link</a></td>
         <td class="level">{{ p.level }}</td>

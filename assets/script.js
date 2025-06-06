@@ -4,6 +4,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const tagSearch = document.getElementById("searchTag");
   const rows = document.querySelectorAll("#problemTable tbody tr");
 
+  // Load dark mode from storage
+  if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark");
+  }
+
+  // Load checkbox states
+  const saved = JSON.parse(localStorage.getItem("progress") || "{}");
+  document.querySelectorAll(".progress-box").forEach(cb => {
+    const key = cb.dataset.name;
+    cb.checked = saved[key] || false;
+    cb.addEventListener("change", () => {
+      saved[key] = cb.checked;
+      localStorage.setItem("progress", JSON.stringify(saved));
+    });
+  });
+
+  // Fill category filter dynamically
   const categories = [...new Set([...rows].map(row => row.querySelector(".category").textContent))];
   categories.sort().forEach(cat => {
     const option = document.createElement("option");
@@ -37,4 +54,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
+  localStorage.setItem("darkMode", document.body.classList.contains("dark"));
+}
+
+function resetProgress() {
+  localStorage.removeItem("progress");
+  localStorage.removeItem("darkMode");
+  document.querySelectorAll(".progress-box").forEach(cb => cb.checked = false);
+  document.body.classList.remove("dark");
+  document.getElementById("levelFilter").value = "";
+  document.getElementById("categoryFilter").value = "";
+  document.getElementById("searchTag").value = "";
+  location.reload();
 }
