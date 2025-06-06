@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const tagSearch = document.getElementById("searchTag");
   const rows = document.querySelectorAll("#problemTable tbody tr");
 
-  // Fill category filter dynamically
   const categories = [...new Set([...rows].map(row => row.querySelector(".category").textContent))];
   categories.sort().forEach(cat => {
     const option = document.createElement("option");
@@ -35,3 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   categoryFilter.addEventListener("change", filterTable);
   tagSearch.addEventListener("input", filterTable);
 });
+
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
