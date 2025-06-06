@@ -1,20 +1,17 @@
 - name: Two Sum
   link: https://leetcode.com/problems/two-sum/
-  status: Completed
-  level: Beginner
+  level: Easy
   category: Arrays
-  tags: [array, hashmap, brute-force]
+  tags: [array, hashmap, brute-force, easy]
 
 - name: Longest Substring Without Repeating Characters
   link: https://leetcode.com/problems/longest-substring-without-repeating-characters/
-  status: Not Started
-  level: Beginner
+  level: Easy
   category: Strings
-  tags: [string, sliding-window, set]
+  tags: [string, sliding-window, set, easy]
 
 - name: Course Schedule
   link: https://leetcode.com/problems/course-schedule/
-  status: In Progress
-  level: Intermediate
+  level: Medium
   category: Graphs
-  tags: [graph, topological-sort, dfs]
+  tags: [graph, topological-sort, dfs, medium]
