@@ -1,17 +1,65 @@
+- name: Contains Duplicate
+  link: https://leetcode.com/problems/contains-duplicate/
+  level: Easy
+  category: Arrays
+  tags: [array, hash-table, sorting]
+
+- name: Valid Anagram
+  link: https://leetcode.com/problems/valid-anagram/
+  level: Easy
+  category: Strings
+  tags: [hash-table, string, sorting]
+
 - name: Two Sum
   link: https://leetcode.com/problems/two-sum/
   level: Easy
   category: Arrays
-  tags: [array, hashmap, brute-force, easy]
+  tags: [array, hash-table]
 
-- name: Longest Substring Without Repeating Characters
-  link: https://leetcode.com/problems/longest-substring-without-repeating-characters/
+- name: Group Anagrams
+  link: https://leetcode.com/problems/group-anagrams/
+  level: Medium
+  category: Hash Table
+  tags: [array, hash-table, string, sorting]
+
+- name: Top K Frequent Elements
+  link: https://leetcode.com/problems/top-k-frequent-elements/
+  level: Medium
+  category: Heap
+  tags: [array, hash-table, heap, bucket-sort, sorting]
+
+- name: Encode and Decode Strings
+  link: https://neetcode.io/problems/string-encode-and-decode
+  level: Medium
+  category: Strings
+  tags: [string, design, encoding]
+
+- name: Product of Array Except Self
+  link: https://leetcode.com/problems/product-of-array-except-self/
+  level: Medium
+  category: Arrays
+  tags: [array, prefix-product, suffix-product, division-free]
+
+- name: Longest Consecutive Sequence
+  link: https://leetcode.com/problems/longest-consecutive-sequence/
+  level: Medium
+  category: Arrays
+  tags: [array, hash-table, union-find]
+
+- name: Valid Palindrome
+  link: https://leetcode.com/problems/valid-palindrome/
   level: Easy
   category: Strings
-  tags: [string, sliding-window, set, easy]
+  tags: [two-pointers, string]
 
-- name: Course Schedule
-  link: https://leetcode.com/problems/course-schedule/
+- name: 3Sum
+  link: https://leetcode.com/problems/3sum/
   level: Medium
-  category: Graphs
-  tags: [graph, topological-sort, dfs, medium]
+  category: Arrays
+  tags: [array, two-pointers, sorting]
+
+- name: Container With Most Water
+  link: https://leetcode.com/problems/container-with-most-water/
+  level: Medium
+  category: Two Pointers
+  tags: [array, two-pointers, greedy]
