@@ -16,47 +16,69 @@
       background: #121212;
       color: #f0f0f0;
     }
-    select, input { margin-right: 10px; padding: 4px; }
-    .tag { background-color: #eee; padding: 2px 6px; margin: 2px; border-radius: 4px; display: inline-block; }
-    .dark .tag { background-color: #333; color: #fff; }
+
+    .controls {
+      margin-bottom: 1em;
+    }
+
+    select, input {
+      margin-right: 10px;
+      padding: 4px;
+    }
+
+    .tag {
+      background-color: #eee;
+      padding: 2px 6px;
+      margin: 2px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .dark .tag {
+      background-color: #333;
+      color: #fff;
+    }
 
     .category-section {
-      margin-bottom: 1em;
       border: 1px solid #ccc;
       border-radius: 6px;
-      overflow: hidden;
+      margin-bottom: 1rem;
     }
+
     .collapsible-header {
-      background-color: #f0f0f0;
-      padding: 10px;
+      background-color: #f5f5f5;
       font-weight: bold;
+      padding: 10px;
       cursor: pointer;
     }
+
     .dark .collapsible-header {
       background-color: #1e1e1e;
     }
+
+    .category-section.collapsed .problem-list {
+      display: none;
+    }
+
     .problem-list {
       padding: 10px;
     }
+
     .problem-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: auto 2fr auto auto auto auto;
+      gap: 10px;
       align-items: center;
       padding: 8px 0;
       border-bottom: 1px solid #ddd;
     }
-    .problem-row span {
-      margin: 4px 8px;
-    }
-    .progress-box {
-      transform: scale(1.2);
-    }
+
     .rating-cell .star {
       cursor: pointer;
       font-size: 18px;
       padding: 0 2px;
     }
+
     .rating-cell .star.selected {
       color: gold;
     }
@@ -98,7 +120,7 @@
                 <span><strong>{{ p.name }}</strong></span>
                 <span><a href="{{ p.link }}" target="_blank">🔗 Link</a></span>
                 <span class="level">{{ p.level }}</span>
-                <span class="category" style="display:none">{{ p.category }}</span>
+                <span class="category" style="display: none">{{ p.category }}</span>
                 <span class="tags">
                   {% for tag in p.tags %}
                     <span class="tag">{{ tag }}</span>
