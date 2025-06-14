@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const tagSearch = document.getElementById("searchTag");
   const rows = document.querySelectorAll(".problem-row");
 
-  // Load dark mode from storage
+  // 🌙 Load dark mode from storage
   if (localStorage.getItem("darkMode") === "true") {
     document.body.classList.add("dark");
   }
 
-  // Load checkbox states
+  // ✅ Load and track checkbox progress
   const savedProgress = JSON.parse(localStorage.getItem("progress") || "{}");
   document.querySelectorAll(".progress-box").forEach(cb => {
     const key = cb.dataset.name;
@@ -20,31 +20,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Add star rating functionality
+  // ✅ Load and manage ratings
+  const savedRatings = JSON.parse(localStorage.getItem("ratings") || "{}");
+
   function addStarRatingToRow(row) {
     const ratingCell = row.querySelector(".rating-cell");
     if (!ratingCell) return;
 
     const problemId = row.dataset.name;
-    const savedRatings = JSON.parse(localStorage.getItem("ratings") || "{}");
-    const currentRating = savedRatings[problemId] || 0;
-
-    ratingCell.innerHTML = "";
+    const rating = savedRatings[problemId] || 0;
+    ratingCell.innerHTML = ""; // Clear old stars
 
     for (let i = 1; i <= 5; i++) {
       const star = document.createElement("span");
-      star.innerHTML = "&#9734;";
+      star.innerHTML = i <= rating ? "★" : "☆";
       star.classList.add("star");
-      star.dataset.value = i;
-
-      if (i <= currentRating) {
-        star.classList.add("selected");
-      }
+      if (i <= rating) star.classList.add("selected");
 
       star.addEventListener("click", () => {
         savedRatings[problemId] = i;
         localStorage.setItem("ratings", JSON.stringify(savedRatings));
-        addStarRatingToRow(row);
+        addStarRatingToRow(row); // Refresh stars
       });
 
       ratingCell.appendChild(star);
@@ -53,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   rows.forEach(addStarRatingToRow);
 
-  // Fill category filter dropdown
+  // ✅ Fill category filter dynamically
   const categories = [...new Set([...rows].map(row => row.querySelector(".category").textContent))];
   categories.sort().forEach(cat => {
     const option = document.createElement("option");
@@ -62,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     categoryFilter.appendChild(option);
   });
 
-  // Filtering function
+  // ✅ Filtering
   function filterTable() {
     const levelVal = levelFilter.value;
     const catVal = categoryFilter.value;
@@ -85,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
   categoryFilter.addEventListener("change", filterTable);
   tagSearch.addEventListener("input", filterTable);
 
-  // Toggle collapsible categories
+  // ✅ Collapsible categories
   document.querySelectorAll(".collapsible-header").forEach(header => {
     header.addEventListener("click", () => {
       const section = header.closest(".category-section");
@@ -94,17 +90,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// 🌙 Toggle dark mode
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
   localStorage.setItem("darkMode", document.body.classList.contains("dark"));
 }
 
+// 🔄 Reset progress and theme (but NOT ratings)
 function resetProgress() {
   localStorage.removeItem("progress");
-  localStorage.removeItem("ratings");
   localStorage.removeItem("darkMode");
   document.querySelectorAll(".progress-box").forEach(cb => cb.checked = false);
-  document.querySelectorAll(".star").forEach(star => star.classList.remove("selected"));
   document.body.classList.remove("dark");
   document.getElementById("levelFilter").value = "";
   document.getElementById("categoryFilter").value = "";
