@@ -1,19 +1,19 @@
 - name: Contains Duplicate
   link: https://leetcode.com/problems/contains-duplicate/
   level: Easy
-  category: Arrays
+  category: Hash Table
   tags: [array, hash-table, sorting]
 
 - name: Valid Anagram
   link: https://leetcode.com/problems/valid-anagram/
   level: Easy
-  category: Strings
+  category: Hash Table
   tags: [hash-table, string, sorting]
 
 - name: Two Sum
   link: https://leetcode.com/problems/two-sum/
   level: Easy
-  category: Arrays
+  category: Hash Table
   tags: [array, hash-table]
 
 - name: Group Anagrams
@@ -37,25 +37,25 @@
 - name: Product of Array Except Self
   link: https://leetcode.com/problems/product-of-array-except-self/
   level: Medium
-  category: Arrays
+  category: Array
   tags: [array, prefix-product, suffix-product, division-free]
 
 - name: Longest Consecutive Sequence
   link: https://leetcode.com/problems/longest-consecutive-sequence/
   level: Medium
-  category: Arrays
+  category: Two Pointers
   tags: [array, hash-table, union-find]
 
 - name: Valid Palindrome
   link: https://leetcode.com/problems/valid-palindrome/
   level: Easy
-  category: Strings
+  category: Two Pointers
   tags: [two-pointers, string]
 
 - name: 3Sum
   link: https://leetcode.com/problems/3sum/
   level: Medium
-  category: Arrays
+  category: Two Pointers
   tags: [array, two-pointers, sorting]
 
 - name: Container With Most Water
@@ -63,3 +63,34 @@
   level: Medium
   category: Two Pointers
   tags: [array, two-pointers, greedy]
+
+- name: Best Time to Buy and Sell Stock
+  link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+  level: Easy
+  category: Two Pointers
+  tags: [array, greedy, dynamic-programming, two-pointers]
+
+- name: Longest Substring Without Repeating Characters
+  link: https://leetcode.com/problems/longest-substring-without-repeating-characters/
+  level: Medium
+  category: Sliding Window
+  tags: [string, hash-table, two-pointers, sliding-window]
+
+- name: Longest Repeating Character Replacement
+  link: https://leetcode.com/problems/longest-repeating-character-replacement/
+  level: Medium
+  category: Sliding Window
+  tags: [string, hash-table, two-pointers, sliding-window]
+
+- name: Minimum Window Substring
+  link: https://leetcode.com/problems/minimum-window-substring/
+  level: Hard
+  category: Sliding Window
+  tags: [string, hash-table, two-pointers, sliding-window]
+
+- name: Minimum Size Subarray Sum
+  link: https://leetcode.com/problems/minimum-size-subarray-sum/
+  level: Medium
+  category: Sliding Window
+  tags: [array, hash-table, two-pointers, sliding-window]
+

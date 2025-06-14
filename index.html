@@ -16,24 +16,49 @@
       background: #121212;
       color: #f0f0f0;
     }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 8px; border: 1px solid #ccc; text-align: left; }
     select, input { margin-right: 10px; padding: 4px; }
     .tag { background-color: #eee; padding: 2px 6px; margin: 2px; border-radius: 4px; display: inline-block; }
     .dark .tag { background-color: #333; color: #fff; }
-    .progress-bar {
-      width: 100px;
-      height: 10px;
-      background: #ddd;
-      position: relative;
-    }
-    .progress-bar span {
-      display: block;
-      height: 100%;
-      background: green;
-    }
-    .controls {
+
+    .category-section {
       margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .collapsible-header {
+      background-color: #f0f0f0;
+      padding: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .dark .collapsible-header {
+      background-color: #1e1e1e;
+    }
+    .problem-list {
+      padding: 10px;
+    }
+    .problem-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .problem-row span {
+      margin: 4px 8px;
+    }
+    .progress-box {
+      transform: scale(1.2);
+    }
+    .rating-cell .star {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 0 2px;
+    }
+    .rating-cell .star.selected {
+      color: gold;
     }
   </style>
 </head>
@@ -60,33 +85,38 @@
     <input type="text" id="searchTag" placeholder="Filter by tag...">
   </div>
 
-  <table id="problemTable">
-    <thead>
-      <tr>
-        <th>✔</th>
-        <th>Problem</th>
-        <th>Link</th>
-        <th>Difficulty</th>
-        <th>Category</th>
-        <th>Tags</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for p in site.data.problems %}
-      <tr>
-        <td><input type="checkbox" class="progress-box" data-name="{{ p.name }}"></td>
-        <td>{{ p.name }}</td>
-        <td><a href="{{ p.link }}" target="_blank">Link</a></td>
-        <td class="level">{{ p.level }}</td>
-        <td class="category">{{ p.category }}</td>
-        <td class="tags">
-          {% for tag in p.tags %}
-            <span class="tag">{{ tag }}</span>
+  <div id="problemContainer">
+    {% assign categories = site.data.problems | map: "category" | uniq | sort %}
+    {% for category in categories %}
+      <div class="category-section">
+        <h3 class="collapsible-header">{{ category }}</h3>
+        <div class="problem-list">
+          {% for p in site.data.problems %}
+            {% if p.category == category %}
+              <div class="problem-row" data-name="{{ p.name }}">
+                <span><input type="checkbox" class="progress-box" data-name="{{ p.name }}"></span>
+                <span><strong>{{ p.name }}</strong></span>
+                <span><a href="{{ p.link }}" target="_blank">🔗 Link</a></span>
+                <span class="level">{{ p.level }}</span>
+                <span class="category" style="display:none">{{ p.category }}</span>
+                <span class="tags">
+                  {% for tag in p.tags %}
+                    <span class="tag">{{ tag }}</span>
+                  {% endfor %}
+                </span>
+                <span class="rating-cell">
+                  <span class="star" data-value="1">&#9734;</span>
+                  <span class="star" data-value="2">&#9734;</span>
+                  <span class="star" data-value="3">&#9734;</span>
+                  <span class="star" data-value="4">&#9734;</span>
+                  <span class="star" data-value="5">&#9734;</span>
+                </span>
+              </div>
+            {% endif %}
           {% endfor %}
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 </body>
 </html>
