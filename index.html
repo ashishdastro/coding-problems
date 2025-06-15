@@ -47,9 +47,13 @@
 
     .collapsible-header {
       background-color: #f5f5f5;
-      font-weight: bold;
       padding: 10px;
       cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
 
     .dark .collapsible-header {
@@ -65,22 +69,54 @@
     }
 
     .problem-row {
-      display: grid;
-      grid-template-columns: auto 2fr auto auto auto auto;
-      gap: 10px;
-      align-items: center;
-      padding: 8px 0;
+      display: flex;
+      flex-wrap: wrap;
       border-bottom: 1px solid #ddd;
+      padding: 8px 0;
+      align-items: center;
     }
 
-    .rating-cell .star {
+    .problem-row .col {
+      padding: 4px 10px;
+      box-sizing: border-box;
+    }
+
+    .checkbox    { width: 5%; min-width: 40px; text-align: center; }
+    .name        { width: 30%; min-width: 160px; }
+    .level       { width: 10%; }
+    .tags        { width: 30%; }
+    .rating-cell { width: 20%; }
+
+    .star {
       cursor: pointer;
       font-size: 18px;
       padding: 0 2px;
+      color: #ccc;
     }
 
-    .rating-cell .star.selected {
+    .star.selected {
       color: gold;
+    }
+
+    .cat-progress {
+      font-size: 0.9em;
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    .cat-bar {
+      flex-grow: 1;
+      height: 8px;
+      background: #444;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .cat-fill {
+      height: 100%;
+      background: mediumseagreen;
+      width: 0%;
+      transition: width 0.3s ease;
     }
   </style>
 </head>
@@ -90,7 +126,9 @@
   <div class="controls">
     <button onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
     <button onclick="resetProgress()">🔄 Reset</button>
+    <button onclick="toggleAll()">↕️ Collapse/Expand All</button>
     <br><br>
+
     <label>Filter by Difficulty:</label>
     <select id="levelFilter">
       <option value="">All</option>
@@ -104,6 +142,22 @@
       <option value="">All</option>
     </select>
 
+    <label>Min Rating:</label>
+    <select id="ratingFilter">
+      <option value="0">All</option>
+      <option value="1">★1+</option>
+      <option value="2">★2+</option>
+      <option value="3">★3+</option>
+      <option value="4">★4+</option>
+      <option value="5">★5 only</option>
+    </select>
+
+    <label>Sort by:</label>
+    <select id="sortBy">
+      <option value="default">Default</option>
+      <option value="rating">⭐ Rating</option>
+    </select>
+
     <input type="text" id="searchTag" placeholder="Filter by tag...">
   </div>
 
@@ -111,28 +165,33 @@
     {% assign categories = site.data.problems | map: "category" | uniq | sort %}
     {% for category in categories %}
       <div class="category-section">
-        <h3 class="collapsible-header">{{ category }}</h3>
+        <h3 class="collapsible-header">
+          <span class="cat-title">{{ category }}</span>
+          <span class="cat-progress"></span>
+          <span class="cat-bar"><div class="cat-fill"></div></span>
+        </h3>
         <div class="problem-list">
           {% for p in site.data.problems %}
             {% if p.category == category %}
               <div class="problem-row" data-name="{{ p.name }}">
-                <span><input type="checkbox" class="progress-box" data-name="{{ p.name }}"></span>
-                <span><strong>{{ p.name }}</strong></span>
-                <span><a href="{{ p.link }}" target="_blank">🔗 Link</a></span>
-                <span class="level">{{ p.level }}</span>
-                <span class="category" style="display: none">{{ p.category }}</span>
-                <span class="tags">
+                <div class="col checkbox"><input type="checkbox" class="progress-box" data-name="{{ p.name }}"></div>
+                <div class="col name">
+                  <a href="{{ p.link }}" target="_blank"><strong>{{ p.name }}</strong></a>
+                </div>
+                <div class="col level">{{ p.level }}</div>
+                <div class="col tags">
                   {% for tag in p.tags %}
                     <span class="tag">{{ tag }}</span>
                   {% endfor %}
-                </span>
-                <span class="rating-cell">
+                </div>
+                <div class="col rating-cell">
                   <span class="star" data-value="1">&#9734;</span>
                   <span class="star" data-value="2">&#9734;</span>
                   <span class="star" data-value="3">&#9734;</span>
                   <span class="star" data-value="4">&#9734;</span>
                   <span class="star" data-value="5">&#9734;</span>
-                </span>
+                </div>
+                <span class="category" style="display:none">{{ p.category }}</span>
               </div>
             {% endif %}
           {% endfor %}
